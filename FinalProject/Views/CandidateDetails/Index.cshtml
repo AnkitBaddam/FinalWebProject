@@ -1,0 +1,174 @@
+﻿@model IEnumerable<FinalProject.Models.CandidateDetail>
+
+<html lang="en-US">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimal-ui" />
+    <meta charset="utf-8" />
+    <title>Federal Electoral Candidates</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="~/css/animate.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/templatemo-style.css" />
+
+    <!-- jQuery -->
+    <script src="~/js/jquery-1.11.0.min.js"></script>
+    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/js/Chart.min.js"></script>
+</head>
+<body>
+    <div class="fluid-container">
+        <header class="site-header">
+            <div class="navbar-default navbar-fixed-top">
+                <div>
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="./index#">Federal Electoral Candidates</a>
+                        <button type="button"
+                                class="navbar-toggle collapsed"
+                                data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul style="margin: right 20px;" class="nav navbar-nav navbar-right">
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="index">Home</a></li>
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="candidates">Candidate Details</a></li>
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="aboutus">About Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <div class="main-content">
+        <div class="fluid-container">
+            <div class="section-welcome">
+                <h2>Candidates List</h2>
+                <p>
+                    The table contains all candidates details
+                </p>
+                <p><a asp-action="Create">Add New Candidate</a></p>
+            </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.party)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.candidate_status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.state)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.party)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.candidate_status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.state)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.candidate_id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.candidate_id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.candidate_id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @*<div class="section-welcome">
+                <canvas id="mybarChart"></canvas>
+            </div>*@
+    </div>
+    
+    @*</div>*@
+
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/custom.js"></script>
+
+    <script src="js/jquery.gmap3.min.js"></script>
+    @*<script>
+            //https://api.open.fec.gov/v1/candidates/?api_key=uNS1gI1EgI1wd3EDB4JoGsVT7qQKCqVknqUikc5s&sort_null_only=false&per_page=20&sort_nulls_last=false&page=1&sort=name&sort_hide_null=false
+            (function () {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var data = JSON.parse(this.responseText);
+                        console.log(data);
+                        var table = document.getElementById("candidates-list");
+
+
+                        let group = data.results.reduce((r, a) => {
+                            r[a.state] = [...r[a.state] || [], a];
+                            return r;
+                        }, {});
+                        let label = Object.keys(group)
+                        let b = []
+                        Object.keys(group).forEach(key => {
+                            b.push(group[key].length)
+                        })
+                        console.log(label, b)
+                        let backgroundcolor = new Array(b.length).fill('gold')
+                        var ctx = document.getElementById("mybarChart").getContext("2d")
+                        console.log(ctx)
+                        var mybarChart = new Chart(ctx,
+                            {
+                                type: 'bar',
+                                data: {
+                                    labels: label,
+                                    datasets: [
+                                        {
+                                            label: "CANDIDATES BY STATE",
+                                            data: b,
+                                            backgroundColor: backgroundcolor
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    legend: { display: false },
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                max: 7,
+                                                min: 0,
+                                                stepSize: 1
+                                            }
+                                        }]
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'CANDIDATES BY STATE'
+                                    }
+                                }
+                            });
+
+                    }
+                };
+                xhttp.open("GET", "https://api.open.fec.gov/v1/candidates/?api_key=uNS1gI1EgI1wd3EDB4JoGsVT7qQKCqVknqUikc5s&sort_null_only=false&per_page=20&sort_nulls_last=false&page=1&sort=name&sort_hide_null=false", true);
+                xhttp.send();
+            }())
+        </script>*@
+</body>
+</html>

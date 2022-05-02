@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html lang="en-US">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta charset="utf-8">
+    <title>Federal Electoral Candidates</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/templatemo-style.css">
+
+    <!-- jQuery -->
+    <script src="~/js/jquery-1.11.0.min.js"></script>
+    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="fluid-container">
+        <header class="site-header">
+            <div class="navbar-default navbar-fixed-top">
+                <div>
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Federal Electoral Candidates</a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="index">Home</a></li>
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="candidates">Candidate Details</a></li>
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="aboutus">About Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="main-content">
+        <div class="fluid-container">
+            <div class="section-welcome">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="~/img/header.png" class="img-responsive animated fadeInLeft" alt="Time is happiness">
+                    </div>
+                    <div class="col-md-8 text-center welcome-section">
+                        <br>
+                        <h2 class="animated fadeInDown">National Federal Election</h2>
+                        <br>
+                        <p class="animated fadeInRight">
+                            The Federal Election Commission (FEC) is an independent regulatory agency of the United States whose purpose is to enforce campaign finance law in United States federal elections. Created in 1974 through amendments to the Federal Election Campaign Act, the commission describes its duties as "to disclose campaign finance information, to enforce the provisions of the law such as the limits and prohibitions on contributions, and to oversee the public funding of Presidential elections."
+                        </p>
+                        <br>
+                        <a class="button-grey animated fadeInUp" asp-area="" asp-controller="Home" asp-action="Learnmore">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FUN FACTS -->
+        <div class="fluid-container animated flipInX" id="facts">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <div class="section-header facts-header">
+                        <h3>Some facts about 2020 Elections </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="section-facts">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 col-lg-3 text-center">
+                        <div class="counter-item">
+                            <div class="counter-inner">
+                                <div class="counter-body">
+                                    <h2 class="start-count" data-count="1604">160+ million</h2>
+                                    <h6>Votes Cast</h6>
+                                    <div class="end-count"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- .counter-item -->
+                    <div class="col-md-3 col-sm-6 col-xs-12 col-lg-3 text-center">
+                        <div class="counter-item">
+                            <div class="counter-inner">
+                                <div class="counter-body">
+                                    <h2 class="start-count" data-count="21">67%</h2>
+                                    <h6>Turnout Rate</h6>
+                                    <div class="end-count"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- .counter-item -->
+                    <div class="col-md-3 col-sm-6 col-xs-12 col-lg-3 text-center">
+                        <div class="counter-item">
+                            <div class="counter-inner">
+                                <div class="counter-body">
+                                    <h2 class="start-count" data-count="302">100+ million</h2>
+                                    <h6>Voting by Mail</h6>
+                                    <div class="end-count"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 col-lg-3 text-center">
+                        <div class="counter-item">
+                            <div class="counter-inner">
+                                <div class="counter-body">
+                                    <h2 class="start-count" data-count="946">14+ billion</h2>
+                                    <h6>Expensive Election Ever</h6>
+                                    <div class="end-count"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Plugins -->
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/custom.js"></script>
+
+    <script src="~/js/jquery.gmap3.min.js"></script>
+
+
+</body>
+</html>

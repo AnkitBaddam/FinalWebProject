@@ -1,0 +1,219 @@
+﻿@{
+    ViewData["Title"] = "candidates Page";
+}
+<html lang="en-US">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimal-ui" />
+    <meta charset="utf-8" />
+    <title>Federal Electoral Candidates</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="~/css/animate.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/templatemo-style.css" />
+
+    <!-- jQuery -->
+    <script src="~/js/jquery-1.11.0.min.js"></script>
+    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+    
+<script type="text/javascript" src="jscript/graph.js"></script>
+    <style>
+        .highlight-code > .microlight {
+            overflow-y: auto;
+            max-height: 400px;
+            min-height: 6em;
+        }
+
+        .column {
+            float: left;
+            width: 33.3%;
+            margin-bottom: 16px;
+            padding: 0 8px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 8px;
+        }
+
+        .about-section {
+            padding: 50px;
+            text-align: center;
+            background-color: #474e5d;
+            color: white;
+        }
+
+        .card-container {
+            padding: 0 16px;
+        }
+
+            .card-container::after,
+            .row::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+        .title {
+            color: grey;
+        }
+
+        .button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            .button:hover {
+                background-color: #555;
+            }
+
+        @*@media screen and (max-width: 650px) {
+            .column {
+                width: 100%;
+                display: block;
+            }
+        }*@
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <div class="fluid-container">
+        <header class="site-header">
+            <div class="navbar-default navbar-fixed-top">
+                <div >
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="./index#">Federal Electoral Candidates</a>
+                        <button type="button"
+                                class="navbar-toggle collapsed"
+                                data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul style="margin: right 20px;" class="nav navbar-nav navbar-right">
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="index">Home</a></li>
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="candidates">Candidate Details</a></li>
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="aboutus">About Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <div class="main-content">
+        <div class="fluid-container">
+            <div class="section-welcome">
+                <h2>Candidates List</h2>
+                <p>
+                    The table contains all candidates details
+                </p>
+                @*<button class="text-right btn btn-default">Add Candidate</button>*@
+                <div class="service-text">
+                    <p><a class="link-service" asp-area="" asp-controller="CandidateDetails" asp-action="Index">Add, View, Edit, Delete candidates</a></p>
+                <div></div>
+                <table class="table" id="candidates-list">
+                    <thead>
+                        <tr>
+                            <th>Candidate Id</th>
+                            <th>Candidate Name</th>
+                            <th>Candidate State</th>
+                            <th>Candidate Status</th>
+                            @*<th> Actions </th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                </div>
+                <div class="section-welcome">
+                    <canvas id="mybarChart"></canvas>
+                </div> 
+            </div>
+        </div>
+    </div>
+    
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/custom.js"></script>
+
+    <script src="~/js/jquery.gmap3.min.js"></script>
+    <script src="~/js/Chart.min.js"></script>
+    <script>
+        //https://api.open.fec.gov/v1/candidates/?api_key=ZEksIdffy3B73CsLvN2kl7YZB5nEu5mBpwP9BFC6&sort_null_only=false&per_page=20&sort_nulls_last=false&page=1&sort=name&sort_hide_null=false
+        (function () {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    console.log(data);
+                    var table = document.getElementById("candidates-list");
+                    data.results.forEach(function (obj, index) {
+                        var row = table.insertRow(index + 1);
+                        var candidateId = row.insertCell(0);
+                        var candidateName = row.insertCell(1);
+                        var candidateState = row.insertCell(2);
+                        var candidateStatus = row.insertCell(3);
+                        candidateId.innerHTML = obj.candidate_id;
+                        candidateName.innerHTML = obj.name;
+                        candidateState.innerHTML = obj.state;
+                        candidateStatus.innerHTML = obj.candidate_status;
+                    })
+                    let group = data.results.reduce((r, a) => {
+                        r[a.state] = [...r[a.state] || [], a];
+                        return r;
+                    }, {});
+                    let label = Object.keys(group)
+                    let dataSet = []
+                    Object.keys(group).forEach(key => {
+                        dataSet.push(group[key].length)
+                    })
+                    console.log(label, dataSet)
+                    var ctx = document.getElementById("mybarChart").getContext("2d")
+                    console.log(ctx)
+                    var myLineChart = new Chart(ctx,
+                        {
+                            type: 'line',
+                            data: {
+                                labels: label,
+                                datasets: [
+                                    {
+                                        label: "CANDIDATES BY STATE",
+                                        data: dataSet
+                                    }
+                                ]
+                            },
+                            options: {
+                                legend: { display: false },
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            max: 7,
+                                            min: 0,
+                                            stepSize: 1
+                                        }
+                                    }]
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'CANDIDATES BY STATE'
+                                }
+                            }
+                        });
+
+                }
+            };
+            xhttp.open("GET", "https://api.open.fec.gov/v1/candidates/?api_key=ZEksIdffy3B73CsLvN2kl7YZB5nEu5mBpwP9BFC6&sort_null_only=false&per_page=20&sort_nulls_last=false&page=1&sort=name&sort_hide_null=false", true);
+            xhttp.send();
+        }())
+    </script>
+</body>
+</html>

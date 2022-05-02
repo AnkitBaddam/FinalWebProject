@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimal-ui" />
+    <meta charset="utf-8" />
+    <title>Federal Electoral Candidates</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="~/css/animate.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/templatemo-style.css" />
+
+    <!-- jQuery -->
+    <script src="~/js/jquery-1.11.0.min.js"></script>
+    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+    <style>
+        .highlight-code > .microlight {
+            overflow-y: auto;
+            max-height: 400px;
+            min-height: 6em;
+        }
+
+        .column {
+            float: left;
+            width: 33.3%;
+            margin-bottom: 16px;
+            padding: 0 8px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 8px;
+        }
+
+        .about-section {
+            padding: 50px;
+            text-align: center;
+            background-color: #474e5d;
+            color: white;
+        }
+
+        .card-container {
+            padding: 0 16px;
+        }
+
+            .card-container::after,
+            .row::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+        .title {
+            color: grey;
+        }
+
+        .button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            .button:hover {
+                background-color: #555;
+            }
+
+        @*@media screen and (max-width: 650px) {
+            .column {
+                width: 100%;
+                display: block;
+            }
+        }*@
+    </style>
+</head>
+<body>
+    <div class="fluid-container">
+        <header class="site-header">
+            <div class="navbar-default navbar-fixed-top">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="./index#">Federal Electoral Candidates</a>
+                        <button type="button"
+                                class="navbar-toggle collapsed"
+                                data-toggle="collapse"
+                                data-target=".navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul style="margin: right 20px;" class="nav navbar-nav navbar-right">
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="index">Home</a></li>
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="candidates">Candidate Details</a></li>
+                            <li><a class="link-service" asp-area="" asp-controller="Home" asp-action="aboutus">About Us</a></li>
+                        </ul>
+                    </div>
+            </div>
+        </header>
+    </div>
+        <div class="main-content">
+        <div class="fluid-container">
+            <div class="section-welcome">
+                <div class="about-section">
+                    <h1>Here are the project links:</h1>
+                    <b style="color: rgb(142, 192, 25);font-size: 20px;">
+                        <a class="myclass" href="https://api.open.fec.gov/developers/#/candidate/get_candidates"> API</a>
+                    </b>
+                    <p>
+                        <b style="color: rgb(142, 192, 25);font-size: 20px;">
+                            <a class="myclass" href="https://github.com/navveenn444/Assignment_LookAndFeel"> Github</a>
+                        </b>
+                    </p>
+                    <h3>DATA MODEL</h3>
+                    <span style="font-size: xx-large; color:rgb(115, 189, 148);">&#8595;</span>
+                    <img src="~/img/ERD.jpg" alt="Schema" style="width: 100%" />
+                    <br/>
+                    <h3>VISUALIZATION</h3>
+                    <span style="font-size: xx-large; color:rgb(115, 189, 148);">&#8595;</span>
+                    <img src="~/img/pie_chart.jpg" alt="Schema" style="width: 70%" />
+                </div>
+
+                <h2 style="text-align: center">Our Team</h2>
+                <div class="row">
+                    <div class="column">
+                        <div class="card">
+                            <img src="~/img/tejasvi.jpg" alt="Tejasvi" style="width: 100%" />
+                            <div class="card-container">
+                                <h3>Tejasvi Andem</h3>
+                                <p>
+                                    Pursuing Masters in Business Analytics and Information Systems at Muma College of Business, University of South Florida. <br />
+                                    3+ years of work experience as a Full Stack Developer in India.<br />
+                                    tandem@usf.edu <br />
+                                    Contact number: (813)-327-1233 <br />
+                                    <a target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tejasvi-a-bb8307161/"><i class="fa"></i>LinkedIn</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="card">
+                            <img src="~/img/ankit.jpg" alt="Ankit" style="width: 100%" />
+                            <div class="card-container">
+                                <h3>Ankit Baddam</h3>
+                                <p>
+                                    Pursuing Masters in Business Analytics and Information Systems at Muma College of Business, University of South Florida. <br />
+                                    3+ years of work experience as a Data Analyst in India.<br />
+                                    ankitreddy@usf.edu <br />
+                                    Contact number: (813)-766-7315 <br />
+                                    <a target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/ankit-reddy-baddam-6464531a0/"><i class="fa"></i>LinkedIn</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="card">
+                            <img src="~/img/mysoora.jpg" alt="Mysoora" style="width: 100%" />
+                            <div class="card-container">
+                                <h3>Mysoora Dereddy</h3>
+                                <p>
+                                    Pursuing Masters in Business Analytics and Information Systems at Muma College of Business, University of South Florida. <br />
+                                    2+ years of work experience as a Business Analyst in India.<br />
+                                    dereddy@usf.edu <br />
+                                    Contact number: (813)-362-7024 <br />
+                                    <a target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/mysoora-d-783279230/"><i class="fa"></i>LinkedIn</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/custom.js"></script>
+
+    <script src="~/js/jquery.gmap3.min.js"></script>
+</body>
+</html>
